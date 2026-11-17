@@ -25,6 +25,11 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      # The Jekyll action runs in Docker as root, so take ownership before Pagefind writes to _site.
+      - name: Build search index
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" _site
+          npx --yes pagefind@1.6.0 --site _site
       - uses: actions/upload-pages-artifact@v5
 
   deploy:

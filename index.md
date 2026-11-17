@@ -7,6 +7,8 @@ title: Home
 This site is generated from plain Markdown files in the
 [repository](https://github.com/velvet-bunny/static-content-example) and published with GitHub Pages.
 
+{% include search.html %}
+
 Each section lives in its own folder and gets its own styling:
 
 - [Micro-guides]({{ '/micro-guides/' | relative_url }}) — short, to-the-point guides.
@@ -22,6 +24,7 @@ Each section lives in its own folder and gets its own styling:
 - **From Markdown to web pages:** [Jekyll](https://jekyllrb.com/), a free tool built into GitHub Pages, converts the Markdown files into web pages.
 - **Publishing:** whenever a change is saved (pushed) to the repository, an automated GitHub Actions workflow rebuilds and publishes the site in about a minute.
 - **Hosting:** [GitHub Pages](https://pages.github.com/) hosts the site for free[^free] at a `github.io` address[^domain].
+- **Search:** [Pagefind](https://pagefind.app/) builds a search index while publishing, and the search box runs entirely in your browser.
 - **Nothing to maintain:** there are no servers or databases, just static web pages.
 - **Moving on from GitHub Pages?** Jekyll is free and open source, so the same Markdown files and templates can be built and hosted almost anywhere else.
 

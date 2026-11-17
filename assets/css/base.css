@@ -61,6 +61,21 @@ h2 {
   color: var(--accent);
 }
 
+.search {
+  --pf-font: var(--font);
+  --pf-outline-focus: var(--accent);
+  margin: 1.5rem 0;
+}
+
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-bar pagefind-input {
+  flex: 1;
+}
+
 .guide-list .summary {
   display: block;
   font-size: 0.9em;

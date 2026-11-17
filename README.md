@@ -12,7 +12,9 @@ _config.yml              Site settings, section list and per-folder defaults
 _layouts/
   default.html           Page shell (header, nav, CSS)
   section.html           Section landing page: renders its content + lists its guides
-  guide.html             A single guide page
+  guide.html             A single guide page (marked as searchable content for Pagefind)
+_includes/
+  search.html            Pagefind search box with a section filter (used on the home page)
 assets/css/
   base.css               Shared styling
   micro.css              Micro-guides styling
@@ -22,8 +24,14 @@ index.md                 Home page
 micro-guides/            Micro-guides section (index.md + one .md per guide)
 idle-guides/             Idle-guides section (index.md + one .md per guide)
 cyberpunk-guides/        Cyberpunk-guides section (index.md + one .md per guide)
-.github/workflows/pages.yml  Builds and deploys on every push to main
+.github/workflows/pages.yml  Builds (Jekyll, then Pagefind) and deploys on every push to main
 ```
+
+## Search
+
+[Pagefind](https://pagefind.app/) runs after Jekyll in the publishing workflow. It indexes
+every guide page (the `data-pagefind-body` element in `_layouts/guide.html`) and writes the
+index and search UI into `_site/pagefind/`. Searching happens entirely in the browser.
 
 ## Adding a guide
 
@@ -63,3 +71,12 @@ bundle exec jekyll serve
 ```
 
 Then open <http://localhost:4000/static-content-example/>.
+
+Search only works after Pagefind has indexed a build. With Node.js installed:
+
+```sh
+bundle exec jekyll build --baseurl ""
+npx pagefind --site _site --serve
+```
+
+Then open <http://localhost:1414/>.
