@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
+  {%- if page.section %}
+  <link rel="stylesheet" href="{{ '/assets/css/' | append: page.section | append: '.css' | relative_url }}">
+  {%- endif %}
+</head>
+<body class="section-{{ page.section | default: 'home' }}">
+  <header class="site-header">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav>
+      {%- for s in site.sections %}
+      <a href="{{ s.url | relative_url }}"{% if page.section == s.id %} aria-current="page"{% endif %}>{{ s.title }}</a>
+      {%- endfor %}
+    </nav>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    Built from Markdown with Jekyll &amp; GitHub Pages.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,323 @@
+/* Cyberpunk-guides: neon glow, glitching headings, scanlines and a moving grid. CSS only, no JS. */
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&family=Share+Tech+Mono&display=swap");
+
+:root {
+  --neon-pink: #ff2a6d;
+  --neon-cyan: #05d9e8;
+  --neon-yellow: #f9f002;
+  --accent: var(--neon-pink);
+  --bg: #0b0221;
+  --text: #d1f7ff;
+  --font: "Share Tech Mono", ui-monospace, Consolas, monospace;
+  --display: "Orbitron", system-ui, sans-serif;
+  --width: 46rem;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at top, #2b0a4a 0%, transparent 60%), var(--bg);
+  text-shadow: 0 0 2px rgb(209 247 255 / 40%);
+}
+
+::selection {
+  background: var(--neon-pink);
+  color: #000;
+}
+
+/* Receding neon grid floor */
+body::before {
+  content: "";
+  position: fixed;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  height: 55vh;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--neon-pink) 1px, transparent 1px),
+    linear-gradient(90deg, var(--neon-pink) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: perspective(300px) rotateX(60deg);
+  transform-origin: bottom;
+  opacity: 0.5;
+  mask-image: linear-gradient(to top, #000 35%, transparent);
+  animation: grid-scroll 1.5s linear infinite;
+}
+
+/* CRT scanlines with a subtle flicker */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, rgb(0 0 0 / 30%) 2px 3px);
+  animation: flicker 5s steps(1) infinite;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--neon-cyan);
+  box-shadow: 0 6px 12px -6px var(--neon-cyan);
+}
+
+.site-title {
+  font-family: var(--display);
+  color: var(--neon-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 8px var(--neon-yellow);
+}
+
+nav a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a[aria-current="page"] {
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-pink);
+}
+
+nav a[aria-current="page"]::before {
+  content: "> ";
+  content: "> " / "";
+}
+
+main a {
+  color: var(--neon-cyan);
+  text-decoration: none;
+  border-bottom: 1px dashed currentcolor;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+
+main a:hover {
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-pink);
+}
+
+h1,
+h2 {
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  color: var(--text);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  line-height: 1.2;
+  text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan), 0 0 20px var(--neon-pink);
+  animation: glitch 4s infinite;
+}
+
+h1::after {
+  content: "_";
+  content: "_" / "";
+  color: var(--neon-yellow);
+  animation: blink 1s steps(1) infinite;
+}
+
+h2 {
+  color: var(--neon-cyan);
+  font-size: 1.2rem;
+}
+
+h2::before {
+  content: "// ";
+  content: "// " / "";
+  color: var(--neon-pink);
+}
+
+/* Guide body: angled panel with a HUD label */
+.guide {
+  position: relative;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgb(5 217 232 / 12%), rgb(255 42 109 / 8%));
+  box-shadow: inset 0 0 0 1px rgb(5 217 232 / 50%), inset 0 0 40px rgb(5 217 232 / 10%);
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+}
+
+.guide::before {
+  content: "SIGNAL // ONLINE";
+  content: "SIGNAL // ONLINE" / "";
+  position: absolute;
+  top: 0.6rem;
+  right: 2.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--neon-yellow);
+  opacity: 0.8;
+}
+
+.breadcrumb a {
+  border: 1px solid var(--neon-cyan);
+  padding: 0.1rem 0.6rem;
+  text-transform: uppercase;
+  font-size: 0.85em;
+}
+
+main ul:not(.guide-list) li::marker {
+  content: "\25B8  ";
+  color: var(--neon-pink);
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  background: #000;
+  color: #39ff14;
+  border-left: 3px solid var(--neon-cyan);
+  box-shadow: 0 0 14px rgb(5 217 232 / 35%);
+}
+
+pre code::before {
+  content: "$ ";
+  color: var(--neon-pink);
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  color: var(--neon-yellow);
+  background: repeating-linear-gradient(-45deg, rgb(249 240 2 / 6%) 0 10px, transparent 10px 20px);
+  border: 1px solid var(--neon-yellow);
+}
+
+blockquote::before {
+  content: "\26A0  INCOMING TRANSMISSION";
+  display: block;
+  font-family: var(--display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+}
+
+blockquote p {
+  margin: 0.5rem 0 0;
+}
+
+/* Section page: numbered HUD cards */
+.guide-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: node;
+}
+
+.guide-list li {
+  counter-increment: node;
+  position: relative;
+  padding: 1rem 1rem 1rem 4.5rem;
+  background: rgb(5 217 232 / 6%);
+  box-shadow: inset 0 0 0 1px rgb(5 217 232 / 40%);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.guide-list li::before {
+  content: "[" counter(node, decimal-leading-zero) "]";
+  content: "[" counter(node, decimal-leading-zero) "]" / "";
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--display);
+  color: var(--neon-yellow);
+}
+
+.guide-list li:hover {
+  transform: translateX(8px);
+  background: rgb(255 42 109 / 12%);
+  box-shadow: inset 0 0 0 1px var(--neon-pink), inset 0 0 24px rgb(255 42 109 / 30%);
+}
+
+.guide-list a {
+  border-bottom: none;
+  font-family: var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.site-footer {
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.site-footer::before {
+  content: "\25E2\25E4  ";
+  content: "\25E2\25E4  " / "";
+  color: var(--neon-pink);
+}
+
+@keyframes grid-scroll {
+  to {
+    background-position: 0 60px;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  47% {
+    opacity: 0.45;
+  }
+
+  49% {
+    opacity: 0.9;
+  }
+
+  51% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes glitch {
+  0%,
+  86%,
+  100% {
+    transform: none;
+    clip-path: none;
+  }
+
+  88% {
+    transform: translate(-4px, 1px) skewX(-10deg);
+    clip-path: inset(8% 0 55% 0);
+    text-shadow: -4px 0 var(--neon-cyan), 4px 0 var(--neon-pink);
+  }
+
+  90% {
+    transform: translate(4px, -1px);
+    clip-path: inset(60% 0 4% 0);
+  }
+
+  92% {
+    transform: translate(-2px, 0) skewX(6deg);
+    clip-path: inset(30% 0 30% 0);
+    text-shadow: 4px 0 var(--neon-cyan), -4px 0 var(--neon-pink);
+  }
+
+  94% {
+    transform: none;
+    clip-path: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

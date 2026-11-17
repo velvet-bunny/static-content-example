@@ -1,0 +1,14 @@
+---
+layout: default
+---
+{{ content }}
+
+{% assign guides = site.pages | where: "section", page.section | where_exp: "p", "p.layout != 'section'" | sort: "title" %}
+<ul class="guide-list">
+  {%- for guide in guides %}
+  <li>
+    <a href="{{ guide.url | relative_url }}">{{ guide.title }}</a>
+    {%- if guide.summary %}<span class="summary">{{ guide.summary }}</span>{% endif %}
+  </li>
+  {%- endfor %}
+</ul>

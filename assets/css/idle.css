@@ -1,0 +1,25 @@
+/* Idle-guides: relaxed, bookish, warm tones. */
+:root {
+  --accent: #a0522d;
+  --bg: #fdf6ec;
+  --text: #3b2f2a;
+  --font: Georgia, "Times New Roman", serif;
+  --width: 48rem;
+}
+
+body {
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+h1 {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.guide {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+}

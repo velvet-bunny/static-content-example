@@ -1,0 +1,50 @@
+title: Static Content Example
+description: Markdown in a repo, published as a static site on GitHub Pages.
+
+# Project site lives at https://velvet-bunny.github.io/static-content-example/
+url: "https://velvet-bunny.github.io"
+baseurl: "/static-content-example"
+
+markdown: kramdown
+
+# Drives the navigation bar. `id` must match the `section` value set in `defaults` below
+# and the stylesheet name in assets/css/<id>.css.
+sections:
+  - id: micro
+    title: Micro-guides
+    url: /micro-guides/
+  - id: idle
+    title: Idle-guides
+    url: /idle-guides/
+  - id: cyberpunk
+    title: Cyberpunk-guides
+    url: /cyberpunk-guides/
+
+# Every Markdown file in a section folder automatically gets the guide layout and its
+# section's styling, so content files only need a title.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "micro-guides"
+    values:
+      layout: guide
+      section: micro
+  - scope:
+      path: "idle-guides"
+    values:
+      layout: guide
+      section: idle
+  - scope:
+      path: "cyberpunk-guides"
+    values:
+      layout: guide
+      section: cyberpunk
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

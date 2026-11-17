@@ -1,0 +1,22 @@
+/* Micro-guides: compact, technical, cool blue. */
+:root {
+  --accent: #0b62d6;
+  --bg: #f4f8ff;
+  --width: 38rem;
+}
+
+body {
+  line-height: 1.45;
+}
+
+h1,
+h2 {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.guide {
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+}
