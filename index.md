@@ -26,6 +26,7 @@ Each section lives in its own folder and gets its own styling:
 - **Hosting:** [GitHub Pages](https://pages.github.com/) hosts the site for free[^free] at a `github.io` address[^domain].
 - **Search:** [Pagefind](https://pagefind.app/) builds a search index while publishing, and the search box runs entirely in your browser.
 - **Nothing to maintain:** there are no servers or databases, just static web pages.
+- **Static doesn't mean limited:** "static" only means the pages are prepared in advance, so interactive features like the search box above still work because they run in your browser.
 - **Moving on from GitHub Pages?** Jekyll is free and open source, so the same Markdown files and templates can be built and hosted almost anywhere else.
 
 [^free]: Free as long as the repository is public. To keep the Markdown files private, you need a paid GitHub plan: Pro for a personal account (about $4/month) or Team for an organization (about $4 per user/month); see [GitHub pricing](https://github.com/pricing). The website itself is still public either way.
